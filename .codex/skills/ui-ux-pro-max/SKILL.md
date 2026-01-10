@@ -9,27 +9,22 @@ Searchable database of UI styles, color palettes, font pairings, chart types, pr
 
 ## Prerequisites
 
-Check if Python is installed:
+Check if uv is installed:
 
 ```bash
-python3 --version || python --version
+uv --version
 ```
 
-If Python is not installed, install it based on user's OS:
+If uv is not installed, install it based on user's OS:
 
-**macOS:**
+**macOS/Linux:**
 ```bash
-brew install python3
-```
-
-**Ubuntu/Debian:**
-```bash
-sudo apt update && sudo apt install python3
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 **Windows:**
 ```powershell
-winget install Python.Python.3.12
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
 ---
@@ -51,7 +46,7 @@ Extract key information from user request:
 Use `search.py` multiple times to gather comprehensive information. Search until you have enough context.
 
 ```bash
-python3 .codex/scripts/search.py "<keyword>" --domain <domain> [-n <max_results>]
+uv run .claude/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --domain <domain> [-n <max_results>]
 ```
 
 **Recommended search order:**
@@ -70,7 +65,7 @@ python3 .codex/scripts/search.py "<keyword>" --domain <domain> [-n <max_results>
 If user doesn't specify a stack, **default to `html-tailwind`**.
 
 ```bash
-python3 .codex/scripts/search.py "<keyword>" --stack html-tailwind
+uv run .claude/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --stack html-tailwind
 ```
 
 Available stacks: `html-tailwind`, `react`, `nextjs`, `vue`, `svelte`, `swiftui`, `react-native`, `flutter`
@@ -115,26 +110,26 @@ Available stacks: `html-tailwind`, `react`, `nextjs`, `vue`, `svelte`, `swiftui`
 
 ```bash
 # 1. Search product type
-python3 .codex/scripts/search.py "beauty spa wellness service" --domain product
+uv run .claude/skills/ui-ux-pro-max/scripts/search.py "beauty spa wellness service" --domain product
 
 # 2. Search style (based on industry: beauty, elegant)
-python3 .codex/scripts/search.py "elegant minimal soft" --domain style
+uv run .claude/skills/ui-ux-pro-max/scripts/search.py "elegant minimal soft" --domain style
 
 # 3. Search typography
-python3 .codex/scripts/search.py "elegant luxury" --domain typography
+uv run .claude/skills/ui-ux-pro-max/scripts/search.py "elegant luxury" --domain typography
 
 # 4. Search color palette
-python3 .codex/scripts/search.py "beauty spa wellness" --domain color
+uv run .claude/skills/ui-ux-pro-max/scripts/search.py "beauty spa wellness" --domain color
 
 # 5. Search landing page structure
-python3 .codex/scripts/search.py "hero-centric social-proof" --domain landing
+uv run .claude/skills/ui-ux-pro-max/scripts/search.py "hero-centric social-proof" --domain landing
 
 # 6. Search UX guidelines
-python3 .codex/scripts/search.py "animation" --domain ux
-python3 .codex/scripts/search.py "accessibility" --domain ux
+uv run .claude/skills/ui-ux-pro-max/scripts/search.py "animation" --domain ux
+uv run .claude/skills/ui-ux-pro-max/scripts/search.py "accessibility" --domain ux
 
 # 7. Search stack guidelines (default: html-tailwind)
-python3 .codex/scripts/search.py "layout responsive" --stack html-tailwind
+uv run .claude/skills/ui-ux-pro-max/scripts/search.py "layout responsive" --stack html-tailwind
 ```
 
 **Then:** Synthesize all search results and implement the design.
@@ -149,10 +144,6 @@ python3 .codex/scripts/search.py "layout responsive" --stack html-tailwind
 4. **Always check UX** - Search "animation", "z-index", "accessibility" for common issues
 5. **Use stack flag** - Get implementation-specific best practices
 6. **Iterate** - If first search doesn't match, try different keywords
-7. **Split Into Multiple Files** - For better maintainability:
-   - Separate components into individual files (e.g., `Header.tsx`, `Footer.tsx`)
-   - Extract reusable styles into dedicated files
-   - Keep each file focused and under 200-300 lines
 
 ---
 
@@ -203,3 +194,30 @@ Before delivering UI code, verify these items:
 ### Visual Quality
 - [ ] No emojis used as icons (use SVG instead)
 - [ ] All icons from consistent icon set (Heroicons/Lucide)
+- [ ] Brand logos are correct (verified from Simple Icons)
+- [ ] Hover states don't cause layout shift
+- [ ] Use theme colors directly (bg-primary) not var() wrapper
+
+### Interaction
+- [ ] All clickable elements have `cursor-pointer`
+- [ ] Hover states provide clear visual feedback
+- [ ] Transitions are smooth (150-300ms)
+- [ ] Focus states visible for keyboard navigation
+
+### Light/Dark Mode
+- [ ] Light mode text has sufficient contrast (4.5:1 minimum)
+- [ ] Glass/transparent elements visible in light mode
+- [ ] Borders visible in both modes
+- [ ] Test both modes before delivery
+
+### Layout
+- [ ] Floating elements have proper spacing from edges
+- [ ] No content hidden behind fixed navbars
+- [ ] Responsive at 320px, 768px, 1024px, 1440px
+- [ ] No horizontal scroll on mobile
+
+### Accessibility
+- [ ] All images have alt text
+- [ ] Form inputs have labels
+- [ ] Color is not the only indicator
+- [ ] `prefers-reduced-motion` respected

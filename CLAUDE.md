@@ -9,7 +9,7 @@ Antigravity Kit is an AI-powered design intelligence toolkit providing searchabl
 ## Search Command
 
 ```bash
-python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<query>" --domain <domain> [-n <max_results>]
+uv run .claude/skills/ui-ux-pro-max/scripts/search.py "<query>" --domain <domain> [-n <max_results>]
 ```
 
 **Domain search:**
@@ -24,7 +24,7 @@ python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<query>" --domain <domai
 
 **Stack search:**
 ```bash
-python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<query>" --stack <stack>
+uv run .claude/skills/ui-ux-pro-max/scripts/search.py "<query>" --stack <stack>
 ```
 Available stacks: `html-tailwind` (default), `react`, `nextjs`, `vue`, `svelte`, `swiftui`, `react-native`, `flutter`
 
@@ -58,7 +58,7 @@ When modifying files, keep all agent workflows in sync:
 
 ## Prerequisites
 
-Python 3.x (no external dependencies required)
+uv (Python package installer and runner, no external dependencies required)
 
 ## Git Workflow
 

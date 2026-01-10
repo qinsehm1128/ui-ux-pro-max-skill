@@ -67,20 +67,17 @@ Copy the appropriate folders to your project:
 
 ## Prerequisites
 
-Python 3.x is required for the search script.
+uv is required for running the search script.
 
 ```bash
-# Check if Python is installed
-python3 --version
+# Check if uv is installed
+uv --version
 
-# macOS
-brew install python3
-
-# Ubuntu/Debian
-sudo apt update && sudo apt install python3
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Windows
-winget install Python.Python.3.12
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
 ## Usage
