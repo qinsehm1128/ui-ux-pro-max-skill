@@ -1,36 +1,29 @@
 ---
-name: ui-ux-pro-max
-description: 'UI/UX design intelligence with 50 styles, 21 palettes, 50 font pairings, and stack-specific best practices'
-agent: 'agent'
+inclusion: manual
 ---
 
-# ui-ux-pro-max
+# UI/UX Pro Max - Design Intelligence
 
 Searchable database of UI styles, color palettes, font pairings, chart types, product recommendations, UX guidelines, and stack-specific best practices.
 
 ## Prerequisites
 
-Check if Python is installed:
+Check if uv is installed:
 
 ```bash
-python3 --version || python --version
+uv --version
 ```
 
-If Python is not installed, install it based on user's OS:
+If uv is not installed, install it based on user's OS:
 
-**macOS:**
+**macOS/Linux:**
 ```bash
-brew install python3
-```
-
-**Ubuntu/Debian:**
-```bash
-sudo apt update && sudo apt install python3
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 **Windows:**
 ```powershell
-winget install Python.Python.3.12
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
 ---
@@ -52,7 +45,7 @@ Extract key information from user request:
 Use `search.py` multiple times to gather comprehensive information. Search until you have enough context.
 
 ```bash
-python3 .shared/ui-ux-pro-max/scripts/search.py "<keyword>" --domain <domain> [-n <max_results>]
+uv run .shared/ui-ux-pro-max/scripts/search.py "<keyword>" --domain <domain> [-n <max_results>]
 ```
 
 **Recommended search order:**
@@ -71,7 +64,7 @@ python3 .shared/ui-ux-pro-max/scripts/search.py "<keyword>" --domain <domain> [-
 If user doesn't specify a stack, **default to `html-tailwind`**.
 
 ```bash
-python3 .shared/ui-ux-pro-max/scripts/search.py "<keyword>" --stack html-tailwind
+uv run .shared/ui-ux-pro-max/scripts/search.py "<keyword>" --stack html-tailwind
 ```
 
 Available stacks: `html-tailwind`, `react`, `nextjs`, `vue`, `svelte`, `swiftui`, `react-native`, `flutter`
@@ -116,26 +109,26 @@ Available stacks: `html-tailwind`, `react`, `nextjs`, `vue`, `svelte`, `swiftui`
 
 ```bash
 # 1. Search product type
-python3 .shared/ui-ux-pro-max/scripts/search.py "beauty spa wellness service" --domain product
+uv run .shared/ui-ux-pro-max/scripts/search.py "beauty spa wellness service" --domain product
 
 # 2. Search style (based on industry: beauty, elegant)
-python3 .shared/ui-ux-pro-max/scripts/search.py "elegant minimal soft" --domain style
+uv run .shared/ui-ux-pro-max/scripts/search.py "elegant minimal soft" --domain style
 
 # 3. Search typography
-python3 .shared/ui-ux-pro-max/scripts/search.py "elegant luxury" --domain typography
+uv run .shared/ui-ux-pro-max/scripts/search.py "elegant luxury" --domain typography
 
 # 4. Search color palette
-python3 .shared/ui-ux-pro-max/scripts/search.py "beauty spa wellness" --domain color
+uv run .shared/ui-ux-pro-max/scripts/search.py "beauty spa wellness" --domain color
 
 # 5. Search landing page structure
-python3 .shared/ui-ux-pro-max/scripts/search.py "hero-centric social-proof" --domain landing
+uv run .shared/ui-ux-pro-max/scripts/search.py "hero-centric social-proof" --domain landing
 
 # 6. Search UX guidelines
-python3 .shared/ui-ux-pro-max/scripts/search.py "animation" --domain ux
-python3 .shared/ui-ux-pro-max/scripts/search.py "accessibility" --domain ux
+uv run .shared/ui-ux-pro-max/scripts/search.py "animation" --domain ux
+uv run .shared/ui-ux-pro-max/scripts/search.py "accessibility" --domain ux
 
 # 7. Search stack guidelines (default: html-tailwind)
-python3 .shared/ui-ux-pro-max/scripts/search.py "layout responsive" --stack html-tailwind
+uv run .shared/ui-ux-pro-max/scripts/search.py "layout responsive" --stack html-tailwind
 ```
 
 **Then:** Synthesize all search results and implement the design.
@@ -165,7 +158,7 @@ These are frequently overlooked issues that make UI look unprofessional:
 
 | Rule | Do | Don't |
 |------|----|----- |
-| **No emoji icons** | Use SVG icons (Heroicons, Lucide, Simple Icons) | Use emojis like 🎨 🚀 ⚙️ as UI icons |
+| **No emoji icons** | Use SVG icons (Heroicons, Lucide, Simple Icons) | Use emojis like :art: :rocket: :gear: as UI icons |
 | **Stable hover states** | Use color/opacity transitions on hover | Use scale transforms that shift layout |
 | **Correct brand logos** | Research official SVG from Simple Icons | Guess or use incorrect logo paths |
 | **Consistent icon sizing** | Use fixed viewBox (24x24) with w-6 h-6 | Mix different icon sizes randomly |
@@ -206,7 +199,6 @@ Before delivering UI code, verify these items:
 - [ ] All icons from consistent icon set (Heroicons/Lucide)
 - [ ] Brand logos are correct (verified from Simple Icons)
 - [ ] Hover states don't cause layout shift
-- [ ] Use theme colors directly (bg-primary) not var() wrapper
 
 ### Interaction
 - [ ] All clickable elements have `cursor-pointer`
